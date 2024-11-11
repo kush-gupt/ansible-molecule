@@ -1,2 +1,2 @@
-# devconfcz2024
-Repository holding the templates for the Ansible Molecule presentation on DevConf.cz 2024
+# Ansible Molecule Demo
+Repository holding the templates for a Ansible Molecule demo
