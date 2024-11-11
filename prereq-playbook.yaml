@@ -2,10 +2,10 @@
 - name: "Create pre-requisites for the Molecule environment"
   hosts: localhost
   vars:
-    collection_dir: /home/localuser/DevConfcz/ansible-collections/ansible_collections
+    collection_dir: /workspaces/ansible-molecule/ansible_collections
     role_dir: example/web/roles
     molecule_dir: example/web/extensions/molecule
-    compacted_file: /home/localuser/molecule_default.tar.gz
+    compacted_file: /workspaces/ansible-molecule/molecule_default.tar.gz
   tasks:
 
     - name: "Create the directory structure"
