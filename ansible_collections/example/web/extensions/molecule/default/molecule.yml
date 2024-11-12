@@ -5,8 +5,8 @@ dependency:
     requirements-file: requirements.yml
 
 platforms:
-  - name: ubi8
-    image: registry.access.redhat.com/ubi8/ubi-init:latest
+  - name: centos_stream_9
+    image: quay.io/centoshyperscale/centos:stream9
   - name: ubi9
     image: registry.access.redhat.com/ubi9/ubi-init:latest
 

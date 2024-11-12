@@ -17,14 +17,14 @@
       ansible.builtin.copy:
         content: |
                  [defaults]
-                 collections_path = home/localuser/.ansible/collections:/usr/share/ansible/collections:{{ collection_dir }}
-        dest: ~/.ansible.cfg
+                 collections_path = /root/.ansible/collections/ansible_collections:/usr/share/ansible/collections/ansible_collections:{{ collection_dir }}
+        dest: "/root/.ansible.cfg"
 
     - name: "Check for collection dir existence"
       stat: path={{ collection_dir }}/example/web
       register: coldir
 
-    - name: "Check for collection dir existence"
+    - name: "Check for role dir existence"
       stat: path={{ collection_dir }}/{{ role_dir }}/install_apache
       register: roledir
 
@@ -36,15 +36,18 @@
       ansible.builtin.shell: "ansible-galaxy role init install_apache --init-path {{ collection_dir }}/{{ role_dir }}/"
       when: not roledir.stat.exists
 
+    - name: "Install podman collection"
+      ansible.builtin.shell: "ansible-galaxy collection install containers.podman -p /workspaces/ansible-molecule"
+
     - name: "Create the molecule structure"
       ansible.builtin.file:
         path: "{{ collection_dir }}/{{ molecule_dir }}"
         state: directory
 
-    - name: "Extract molecule content to default dir"
-      ansible.builtin.unarchive:
-        src: "{{ compacted_file }}"
-        dest: "{{ collection_dir }}/{{ molecule_dir }}"
+    # - name: "Extract molecule content to default dir"
+    #   ansible.builtin.unarchive:
+    #     src: "{{ compacted_file }}"
+    #     dest: "{{ collection_dir }}/{{ molecule_dir }}"
 
     - name: "Insert the install apache task"
       ansible.builtin.copy:
